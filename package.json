@@ -1,0 +1,26 @@
+{
+  "name": "data-reports-slack-bot",
+  "version": "0.1.0",
+  "description": "Slackbot to send reminders to those who haven't filled out a report sheet for H&W.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmdevita/data-reports-slack-bot.git"
+  },
+  "author": "Julian De Vita <julian@devita.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmdevita/data-reports-slack-bot/issues"
+  },
+  "homepage": "https://github.com/jmdevita/data-reports-slack-bot#readme",
+  "dependencies": {
+    "@slack/events-api": "^2.3.4",
+    "@slack/web-api": "^5.13.0",
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "ngrok": "^3.3.0"
+  }
+}
