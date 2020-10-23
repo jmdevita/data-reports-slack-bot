@@ -1,4 +1,8 @@
 # Project Files #
-.env
+*.env
 /node_modules
 /ngrok
+*.sh
+
+# Exceptions #
+!ngrok-secret.sh
