@@ -1,39 +1,35 @@
-const { createServer } = require('http')
-const express = require('express');
-const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3000;
 
 const dotenv = require('dotenv');
-const axios = require('axios');
-
-const { WebClient } = require('@slack/web-api');
-
-const { createEventAdapter } = require('@slack/events-api');
 
 // Initialize dotenv
 dotenv.config()
 
-// Create an express app
-const app = express();
+// ------------------------------------ \\
 
-// Read the signing secret from the environment variables
-const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
+const { App } = require('@slack/bolt');
 
-// Initialize
-const slackEvents = createEventAdapter(signingSecret = slackSigningSecret);
+const app = new App({
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: process.env.SLACK_BOT_TOKEN,
+});
 
-// Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
-slackEvents.on('message', (event) => {
-    console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-  });
+/* Add functionality here */
 
-// Handle errors (see `errorCodes` export)
-slackEvents.on('error', console.error);
+// Listens to incoming messages that contain "hello"
+app.message('hello', async ({ message, say }) => {
+  // say() sends a message to the channel where the event was triggered
+  await say(`Hey there <@${message.user}>!`);
+  console.log(`Responded hello to ${message.user}`)
+});
+
+app.event('app_home_opened', ({ event, say }) => {  
+  say(`Hey <@${event.user}>!`);
+  console.log(`${event.user} opened app.`)
+});
 
 (async () => {
-// Start a basic HTTP server
-    await slackEvents.start(PORT).then(() => {
-        // Listening on path '/slack/events' by default
-        console.log(`server listening on port ${PORT}`);
-    });
-  })();
+  // Start the app
+  await app.start(PORT);
+  console.log(`App is running! On Server Port ${PORT}`);
+})();

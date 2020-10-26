@@ -4,7 +4,7 @@
   "description": "Slackbot to send reminders to those who haven't filled out a report sheet for H&W.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jmdevita/data-reports-slack-bot#readme",
   "dependencies": {
+    "@slack/bolt": "^2.4.1",
     "@slack/events-api": "^2.3.4",
     "@slack/web-api": "^5.13.0",
     "axios": "^0.20.0",

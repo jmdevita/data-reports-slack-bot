@@ -1,3 +1,6 @@
+# Unnecessary Files #
+old_code.js
+
 # Project Files #
 *.env
 /node_modules
